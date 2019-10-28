@@ -24,6 +24,22 @@ logger = logging.getLogger("paleo")
 logger.setLevel(logging.INFO)
 
 
+def _pretty_print_times(headers, result_times):
+    column_widths = []
+    for header in headers:
+        w = len(header) + 2
+        column_widths.append(w)
+        print(header.ljust(w), end='  ')
+    print()
+
+    max_decimals = 4
+
+    for times in result_times:
+        for i, time in enumerate(times):
+            print(str(round(time, max_decimals))[:column_widths[i]].ljust(column_widths[i]), end='  ')
+        print()
+
+
 class Profiler():
     def __init__(self, filename, separator='\t'):
         """Initialize a profiler for the given network architecture."""
@@ -155,24 +171,7 @@ class Profiler():
                 print('Use gemm: %s  PPP comp: %f   PPP comm: %f' %
                       (use_only_gemm, ppp_comp, ppp_comm))
 
-                column_widths = []
-                for header in headers:
-                    w = len(header) + 2
-                    column_widths.append(w)
-                    print(header.ljust(w), end='  ')
-                print()
-
-                max_decimals = 4
-
-                for times in scaling_times:
-                    for i, time in enumerate(times):
-                        print(str(round(time, max_decimals))[:column_widths[i]].ljust(column_widths[i]), end='  ')
-                    print()
-
-                # print(self._separator.join(headers))
-                # for times in scaling_times:
-                #     print(self._separator.join([str(t) for t in times]))
-                # return scaling_times
+                _pretty_print_times(headers, scaling_times)
         elif parallel == 'model':
             # Estimate time for weights update.
             # Weak scaling.
@@ -188,9 +187,7 @@ class Profiler():
             print('Use pipelining: %s' % use_pipeline)
             print('Use gemm: %s  PPP comp: %f   PPP comm: %f' %
                   (use_only_gemm, ppp_comp, ppp_comm))
-            print(self._separator.join(headers))
-            for times in result_times:
-                print(self._separator.join([str(t) for t in times]))
+            _pretty_print_times(headers, result_times)
         elif parallel == 'hybrid':
             # Estimate time for weights update.
             print('=' * 10)
@@ -206,9 +203,7 @@ class Profiler():
             print('Hybrid workers: %d' % hybrid_workers)
             print('Use gemm: %s  PPP comp: %f   PPP comm: %f' %
                   (use_only_gemm, ppp_comp, ppp_comm))
-            print(self._separator.join(headers))
-            for times in result_times:
-                print(self._separator.join([str(t) for t in times]))
+            _pretty_print_times(headers, result_times)
 
 
 class BaseProfiler(object):
