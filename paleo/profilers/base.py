@@ -92,7 +92,7 @@ class ProfilerOptions(object):
         self.gradient_wrt = 'data'  # data, filter, None
         self.num_warmup = 10
         self.num_iter = 50
-        self.use_cudnn_heuristics = True
+        self.use_cudnn_heuristics = False
 
         # By default we don't include bias and activation.
         # this will make layer-wise comparison easier.
