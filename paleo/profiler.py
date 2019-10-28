@@ -154,9 +154,24 @@ class Profiler():
                 print('Use pipelining: %s' % use_pipeline)
                 print('Use gemm: %s  PPP comp: %f   PPP comm: %f' %
                       (use_only_gemm, ppp_comp, ppp_comm))
-                print(self._separator.join(headers))
+
+                column_widths = []
+                for header in headers:
+                    w = len(header) + 2
+                    column_widths.append(w)
+                    print(header.ljust(w), end='  ')
+                print()
+
+                max_decimals = 4
+
                 for times in scaling_times:
-                    print(self._separator.join([str(t) for t in times]))
+                    for i, time in enumerate(times):
+                        print(str(round(time, max_decimals))[:column_widths[i]].ljust(column_widths[i]), end='  ')
+                    print()
+
+                # print(self._separator.join(headers))
+                # for times in scaling_times:
+                #     print(self._separator.join([str(t) for t in times]))
                 # return scaling_times
         elif parallel == 'model':
             # Estimate time for weights update.
