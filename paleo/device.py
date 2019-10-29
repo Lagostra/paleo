@@ -106,6 +106,9 @@ GPU_GEFORCE_750M = Device(
 CPU_I7_5930K = Device(
     'CPU i7 5930K', clock=6 * 35000, peek_gflop=289, mem_bandwidth=68)
 
+CPU_I7_4770K = Device(
+    'CPU i7 4770K', clock=4 * 34000, peek_gflop=206, mem_bandwidth=68)
+
 DEVICES = {
     'TITAN_X': GPU_TITAN_X,
     'K20': GPU_K20,
@@ -114,5 +117,6 @@ DEVICES = {
     'K80': GPU_K80,
     'GEFORCE_780_TI': GPU_GEFORCE_780_TI,
     'GEFORCE_750_M': GPU_GEFORCE_750M,
-    'CPU_I7': CPU_I7_5930K
+    'CPU_I7': CPU_I7_5930K,
+    'CPU_I7_4770K': CPU_I7_4770K,
 }
