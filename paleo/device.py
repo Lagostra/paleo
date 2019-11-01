@@ -89,6 +89,11 @@ GPU_K40 = Device(
 GPU_K80 = Device(
     'K80', clock=560, peek_gflop=5600, mem_bandwidth=480, is_gpu=True)
 
+# Note: Peak FLOPS for tensors is 125GFLOPS! Perhaps the model is too simple for specialized hardware?
+GPU_V100 = Device(
+    'V100', clock=1530, peek_gflop=15700, mem_bandwidth=900, is_gpu=True
+)
+
 GPU_GEFORCE_780_TI = Device(
     'GeForce 780 Ti',
     clock=875,
@@ -115,6 +120,7 @@ DEVICES = {
     'K20X': GPU_K20X,
     'K40': GPU_K40,
     'K80': GPU_K80,
+    'V100': GPU_V100,
     'GEFORCE_780_TI': GPU_GEFORCE_780_TI,
     'GEFORCE_750_M': GPU_GEFORCE_750M,
     'CPU_I7': CPU_I7_5930K,
