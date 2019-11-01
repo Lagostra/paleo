@@ -43,7 +43,7 @@ def _profile_for_batch_size(layer_list,
         options.include_bias_and_activation = False
         options.ppp_comp = ppp_comp
         options.ppp_comm = ppp_comm
-        flops_profiler = profilers.FlopsProfiler(options, device)
+        flops_profiler = profilers.FlopsProfiler(options, device)  # Why instantiate new profiler for every layer?
 
         layer_time = flops_profiler.profile(
             layer, layer_spec.device_id,
@@ -107,7 +107,7 @@ def simulate_model_parallel(nested_list, layer_list, batch_size, device,
     for direction, times in [('Fwd', forward_times), ('Bwd', backward_times)]:
         lower, upper = _sum_with_parallel(nested_list, layer_list, times)
         result_times.append([direction, lower, upper])
-    headers = ['Pass', 'Lowerbound, Upperbound']
+    headers = ['Pass', 'Lowerbound', 'Upperbound']
     return headers, result_times
 
 

@@ -36,7 +36,10 @@ def _pretty_print_times(headers, result_times):
 
     for times in result_times:
         for i, time in enumerate(times):
-            print(str(round(time, max_decimals))[:column_widths[i]].ljust(column_widths[i]), end='  ')
+            if type(time) == str:
+                print(time.ljust(column_widths[i]), end='  ')
+            else:
+                print(str(round(time, max_decimals))[:column_widths[i]].ljust(column_widths[i]), end='  ')
         print()
 
 
