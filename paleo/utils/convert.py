@@ -14,4 +14,4 @@ if __name__ == '__main__':
 
     convertor = CaffeConvertor()
     net = convertor.convert(filename)
-    print(json.dumps(net.as_dict(), sort_keys=True, indent=4))
+    print(json.dumps(net.as_dict(), indent=4))
