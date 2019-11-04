@@ -78,7 +78,7 @@ class FlopsProfiler(BaseProfiler):
         if not flops or flops == 0:
             return 0
         gflops = flops / (10 ** 9)
-        time_in_sec = gflops / self._device.peek_gflop
+        time_in_sec = gflops / self._device.peak_gflops
         time_in_ms = time_in_sec * (10 ** 3)
         clock_time_in_ms = 1 / self._device.clock / (10 ** 3)
         # PPP for computation, since we estimated form the full time.

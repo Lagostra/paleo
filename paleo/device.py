@@ -8,17 +8,17 @@ from __future__ import print_function
 class Device(object):
     """Specification for devices."""
 
-    def __init__(self, name, clock, peek_gflop, mem_bandwidth, is_gpu=False):
+    def __init__(self, name, clock, peak_gflops, mem_bandwidth, is_gpu=False):
         """
         Args:
             name: device name
             clock: MHz
-            peek_gflop: GFLOPS
+            peak_gflops: GFLOPS
             mem_bandwidth: GB/sec
         """
         self._name = name
         self.clock = clock
-        self.peek_gflop = float(peek_gflop)
+        self.peak_gflops = float(peak_gflops)
         self.mem_bandwidth = float(mem_bandwidth)
         self._is_gpu = is_gpu
 
@@ -75,44 +75,44 @@ NETWORKS = {'aws': AWS,
 
 # Predefined devices.
 GPU_TITAN_X = Device(
-    'Titan X', clock=1000, peek_gflop=6144, mem_bandwidth=336.5, is_gpu=True)
+    'Titan X', clock=1000, peak_gflops=6144, mem_bandwidth=336.5, is_gpu=True)
 
 GPU_K20 = Device(
-    'K20', clock=1000, peek_gflop=3520, mem_bandwidth=208, is_gpu=True)
+    'K20', clock=1000, peak_gflops=3520, mem_bandwidth=208, is_gpu=True)
 
 GPU_K20X = Device(
-    'K20X', clock=1000, peek_gflop=3935, mem_bandwidth=250, is_gpu=True)
+    'K20X', clock=1000, peak_gflops=3935, mem_bandwidth=250, is_gpu=True)
 
 GPU_K40 = Device(
-    'K40', clock=745, peek_gflop=4290, mem_bandwidth=288, is_gpu=True)
+    'K40', clock=745, peak_gflops=4290, mem_bandwidth=288, is_gpu=True)
 
 GPU_K80 = Device(
-    'K80', clock=560, peek_gflop=5600, mem_bandwidth=480, is_gpu=True)
+    'K80', clock=560, peak_gflops=5600, mem_bandwidth=480, is_gpu=True)
 
 # Note: Peak FLOPS for tensors is 125GFLOPS! Perhaps the model is too simple for specialized hardware?
 GPU_V100 = Device(
-    'V100', clock=1530, peek_gflop=15700, mem_bandwidth=900, is_gpu=True
+    'V100', clock=1530, peak_gflops=15700, mem_bandwidth=900, is_gpu=True
 )
 
 GPU_GEFORCE_780_TI = Device(
     'GeForce 780 Ti',
     clock=875,
-    peek_gflop=5040,
+    peak_gflops=5040,
     mem_bandwidth=336,
     is_gpu=True)
 
 GPU_GEFORCE_750M = Device(
     'GeForce 750 M',
     clock=941,
-    peek_gflop=722.7,
+    peak_gflops=722.7,
     mem_bandwidth=80,
     is_gpu=True)
 
 CPU_I7_5930K = Device(
-    'CPU i7 5930K', clock=6 * 35000, peek_gflop=289, mem_bandwidth=68)
+    'CPU i7 5930K', clock=6 * 35000, peak_gflops=289, mem_bandwidth=68)
 
 CPU_I7_4770K = Device(
-    'CPU i7 4770K', clock=4 * 34000, peek_gflop=206, mem_bandwidth=68)
+    'CPU i7 4770K', clock=4 * 34000, peak_gflops=206, mem_bandwidth=68)
 
 DEVICES = {
     'TITAN_X': GPU_TITAN_X,
