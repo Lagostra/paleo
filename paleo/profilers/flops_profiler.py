@@ -24,6 +24,8 @@ class FlopsProfiler(BaseProfiler):
             from paleo.profilers import cudnn_profiler as cudnn
             self.cudnn = cudnn
 
+        self.estimate_remote_fetch = self._estimate_remote_fetch
+
     def profile(self,
                 layer,
                 current_device=0,
