@@ -25,6 +25,7 @@ class FlopsProfiler(BaseProfiler):
             self.cudnn = cudnn
 
         self.estimate_remote_fetch = self._estimate_remote_fetch
+        self.estimate_comm_time = self._estimate_comm_time
 
     def profile(self,
                 layer,
