@@ -347,8 +347,7 @@ class GraphWalker(object):
             for x in node.outbounds:
                 assert self.indegrees[x] > 0
                 self.indegrees[x] -= 1
-            frontiers = node.outbounds
-            return self.nested_list_till_joints(history, frontiers)
+            return self.nested_list_till_joints(history, frontiers=node.outbounds)
         else:
             # When the frontier has more than one nodes, we explore from each
             # frontier individually until they reach a common joint.
@@ -368,5 +367,4 @@ class GraphWalker(object):
             # Reached joints becomes the new frontiers.
             for joint in merged_joints:
                 self.joints.remove(joint)
-            frontiers = list(merged_joints)
-            return self.nested_list_till_joints(history, frontiers)
+            return self.nested_list_till_joints(history, frontiers=list(merged_joints))
